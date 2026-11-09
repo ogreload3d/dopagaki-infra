@@ -48,9 +48,8 @@ cp ../Caddyfile "$APP_DIR"
 cp ../compose.yaml "$APP_DIR"
 ls -ld "$APP_DIR" "$APP_DIR"/site
 
-echo "copying engima file"
-mkdir -p "$APP_DIR"/enigma/{config,db,logs,filebase,art,mods,mail,site}
-cp ../enigma/config.hjson "$APP_DIR"/enigma/config
+echo "copying engima repo"
+git clone https://github.com/ogreload3d/dopagaki-bbs.git "$APP_DIR"/engima
 
 echo "now giving access to users"
 chown -R longshoreman:longshoreman "$APP_DIR"
