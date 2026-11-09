@@ -20,13 +20,13 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./config:/enigma-bbs/config
-      - ./db:/enigma-bbs/db
-      - ./logs:/enigma-bbs/logs
-      - ./filebase:/enigma-bbs/filebase
-      - ./art:/enigma-bbs/art
-      - ./mods:/enigma-bbs/mods
-      - ./mail:/mail
+      - ./enigma/config:/enigma-bbs/config
+      - ./enigma/db:/enigma-bbs/db
+      - ./enigma/logs:/enigma-bbs/logs
+      - ./enigma/filebase:/enigma-bbs/filebase
+      - ./enigma/art:/enigma-bbs/art
+      - ./enigma/mods:/enigma-bbs/mods
+      - ./enigma/mail:/mail
 
 volumes:
   caddy_data:

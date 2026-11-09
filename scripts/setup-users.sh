@@ -2,6 +2,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+APP_DIR="opt/dopagaki"
+
 if [[ $EUID -ne 0 ]]; then
     echo "Run this script as root (sudo)."
     exit 1
@@ -24,13 +26,10 @@ fi
 
 # Docker operator.
 usermod -aG docker longshoreman
-install -d -o longshoreman -g longshoreman -m 711 /opt/dopagaki
+install -d -o longshoreman -g longshoreman -m 711 "$APP_DIR"
 
 # Hugo
-install -d -o hugo -g hugo -m 755 /opt/dopagaki/site
-# dont forget that it creates the folder, 
-# but all the subfolders etc. need to be granted separately
-chown -R hugo:hugo /opt/dopagaki/site
+install -d -o hugo -g hugo -m 755 "$APP_DIR"/site
 
 # give hugo his ssh
 mkdir -p /home/hugo/.ssh
@@ -45,11 +44,17 @@ id longshoreman
 id hugo
 
 echo "Copying Caddyfile and compose.yaml"
-cp ../Caddyfile /opt/dopagaki
-cp ../compose.yaml /opt/dopagaki
-ls -ld /opt/dopagaki /opt/dopagaki/site
+cp ../Caddyfile "$APP_DIR"
+cp ../compose.yaml "$APP_DIR"
+ls -ld "$APP_DIR" "$APP_DIR"/site
 
-echo
-echo "Files & directories created!"
+echo "copying engima file"
+mkdir -p "$APP_DIR"/enigma/{config,db,logs,filebase,art,mods,mail,site}
+cp ../enigma/config.hjson "$APP_DIR"/enigma/config
+
+echo "now giving access to users"
+chown -R longshoreman:longshoreman "$APP_DIR"
+chown -R hugo:hugo "$APP_DIR"/site
 
 echo "DONE!"
+echo "run longshoreman-up.sh to complete the installation"
