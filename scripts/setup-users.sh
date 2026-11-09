@@ -2,7 +2,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="opt/dopagaki"
+APP_DIR="/opt/dopagaki"
 
 if [[ $EUID -ne 0 ]]; then
     echo "Run this script as root (sudo)."
