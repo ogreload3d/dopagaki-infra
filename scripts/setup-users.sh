@@ -49,7 +49,7 @@ cp ../compose.yaml "$APP_DIR"
 ls -ld "$APP_DIR" "$APP_DIR"/site
 
 echo "copying engima repo"
-git clone https://github.com/ogreload3d/dopagaki-bbs.git "$APP_DIR"/engima
+git clone https://github.com/ogreload3d/dopagaki-bbs.git "$APP_DIR"/enigma
 
 echo "now giving access to users"
 chown -R longshoreman:longshoreman "$APP_DIR"
