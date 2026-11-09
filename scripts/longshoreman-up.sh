@@ -1,6 +1,8 @@
-su - longshoreman
+#!/usr/bin/env bash
+set -euo pipefail
+
 cd /opt/dopagaki
-docker compose up -d
+sudo -u longshoreman docker compose up -d
 
 # docker compose up -d
 # docker compose down
