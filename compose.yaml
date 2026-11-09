@@ -1,0 +1,33 @@
+
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./site:/srv:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  enigma:
+    image: enigmabbs/enigma-bbs:latest
+    restart: unless-stopped
+    stop_grace_period: 30s
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./config:/enigma-bbs/config
+      - ./db:/enigma-bbs/db
+      - ./logs:/enigma-bbs/logs
+      - ./filebase:/enigma-bbs/filebase
+      - ./art:/enigma-bbs/art
+      - ./mods:/enigma-bbs/mods
+      - ./mail:/mail
+
+volumes:
+  caddy_data:
+  caddy_config:
